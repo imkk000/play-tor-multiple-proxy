@@ -1,0 +1,35 @@
+---
+services:
+  onion_circuit_1:
+    image: docker.io/dockurr/tor:latest
+    container_name: onion_circuit_1
+    ports:
+      - 127.0.0.1:9051:9050
+  onion_circuit_2:
+    image: docker.io/dockurr/tor:latest
+    container_name: onion_circuit_2
+    ports:
+      - 127.0.0.1:9052:9050
+  onion_circuit_3:
+    image: docker.io/dockurr/tor:latest
+    container_name: onion_circuit_3
+    ports:
+      - 127.0.0.1:9053:9050
+  onion_dns_only:
+    image: docker.io/dockurr/tor:latest
+    container_name: onion_dns_only
+    ports:
+      - 127.0.0.1:9059:9053/udp
+    volumes:
+      - ./torrc:/etc/tor/torrc:ro
+  onion_reverse:
+    image: docker.io/library/nginx:alpine
+    container_name: onion_reverse
+    ports:
+      - 127.0.0.1:9050:9050
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - onion_circuit_1
+      - onion_circuit_2
+      - onion_circuit_3
