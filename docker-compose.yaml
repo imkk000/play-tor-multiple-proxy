@@ -3,18 +3,12 @@ services:
   onion_circuit_1:
     image: docker.io/dockurr/tor:latest
     container_name: onion_circuit_1
-    ports:
-      - 127.0.0.1:9051:9050
   onion_circuit_2:
     image: docker.io/dockurr/tor:latest
     container_name: onion_circuit_2
-    ports:
-      - 127.0.0.1:9052:9050
   onion_circuit_3:
     image: docker.io/dockurr/tor:latest
     container_name: onion_circuit_3
-    ports:
-      - 127.0.0.1:9053:9050
   onion_dns_only:
     image: docker.io/dockurr/tor:latest
     container_name: onion_dns_only
